@@ -1,4 +1,4 @@
-/* Search form */
+@import '~node_modules/modern-normalize/modern-normalize.css'; /* Search form */
 #search-form {
   display: flex;
   justify-content: center;
@@ -48,7 +48,8 @@
 .photo-card img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .info {
@@ -82,4 +83,4 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
+}/*# sourceMappingURL=index.css.map */
