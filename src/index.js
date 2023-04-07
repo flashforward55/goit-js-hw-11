@@ -56,6 +56,11 @@ function displayImages(images) {
     div.appendChild(link);
 
     galleryDiv.appendChild(div);
+
+    // Activate the simplelightbox plugin
+    const lightbox = new SimpleLightbox('.gallery a', {
+      captionDelay: 250,
+    }).refresh();
   });
 }
 
