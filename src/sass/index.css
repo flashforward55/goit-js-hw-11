@@ -1,3 +1,4 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
 * {
   box-sizing: border-box;
 }
@@ -17,11 +18,7 @@ body {
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 48
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
 /* Style the form container */
@@ -37,7 +34,7 @@ body {
 }
 
 /* Style the search input */
-.search-form input[type="text"] {
+.search-form input[type=text] {
   flex: 1;
   padding: 10px;
   margin-right: 10px;
@@ -50,19 +47,19 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.search-form input[type="text"]:focus {
+.search-form input[type=text]:focus {
   outline: 1px solid #A6ACB9;
 }
 
 /* Style the search button */
-.search-form button[type="submit"] {
+.search-form button[type=submit] {
   border: none;
   background-color: transparent;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
 
-.search-form button[type="submit"]:hover {
+.search-form button[type=submit]:hover {
   transform: scale(1.1);
 }
 
@@ -70,4 +67,4 @@ body {
 .material-symbols-outlined {
   font-size: 24px;
   color: #333;
-}
+}/*# sourceMappingURL=index.css.map */
