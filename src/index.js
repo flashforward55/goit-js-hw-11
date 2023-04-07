@@ -12,6 +12,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 let page = 1;
 let searchQuery = '';
+const per_page = 20;
 
 // Function to display images on the page
 function displayImages(images) {
@@ -56,19 +57,24 @@ function displayImages(images) {
     div.appendChild(link);
 
     galleryDiv.appendChild(div);
-
-    // Activate the simplelightbox plugin
-    const lightbox = new SimpleLightbox('.gallery a', {
-      captionDelay: 250,
-    }).refresh();
   });
+
+  // Activate the simplelightbox plugin
+  let lightbox = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+  }).refresh();
 }
 
 // Function to handle HTTP requests
 async function handleRequest() {}
 
 // Event listener for the search form
-searchForm.addEventListener();
+searchForm.addEventListener('submit', event => {
+  event.preventDefault();
+  searchQuery = event.target.elements.searchQuery.value.trim();
+  galleryDiv.innerHTML = '';
+  const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`;
+});
 
 // Event listener for the load more button
-loadMoreBtn.addEventListener();
+loadMoreBtn.addEventListener('click', () => {});
