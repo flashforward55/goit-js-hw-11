@@ -10,9 +10,9 @@ const searchForm = document.querySelector('#search-form');
 const galleryDiv = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 
-let page = 1;
+let page = 0;
 let searchQuery = '';
-const per_page = 20;
+const perPage = 20;
 
 // Function to display images on the page
 function displayImages(images) {
@@ -71,10 +71,14 @@ async function handleRequest() {}
 // Event listener for the search form
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
+  page = 1;
   searchQuery = event.target.elements.searchQuery.value.trim();
   galleryDiv.innerHTML = '';
-  const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`;
+  const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
 });
 
 // Event listener for the load more button
-loadMoreBtn.addEventListener('click', () => {});
+loadMoreBtn.addEventListener('click', () => {
+  page = +1;
+  const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
+});
