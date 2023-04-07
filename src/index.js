@@ -23,6 +23,30 @@ function displayImages(images) {
     img.src = image.webformatURL;
     img.alt = image.tags;
     img.loading = 'lazy';
+
+    const detailsDiv = document.createElement('div');
+    detailsDiv.classList.add('details');
+
+    const likesSpan = document.createElement('span');
+    likesSpan.classList.add('likes');
+    likesSpan.textContent = image.likes.toString();
+
+    const viewsSpan = document.createElement('span');
+    viewsSpan.classList.add('views');
+    viewsSpan.textContent = image.views.toString();
+
+    const commentsSpan = document.createElement('span');
+    commentsSpan.classList.add('comments');
+    commentsSpan.textContent = image.comments.toString();
+
+    const downloadsSpan = document.createElement('span');
+    downloadsSpan.classList.add('downloads');
+    downloadsSpan.textContent = image.downloads.toString();
+
+    detailsDiv.appendChild(likesSpan);
+    detailsDiv.appendChild(viewsSpan);
+    detailsDiv.appendChild(commentsSpan);
+    detailsDiv.appendChild(downloadsSpan);
   });
 }
 
