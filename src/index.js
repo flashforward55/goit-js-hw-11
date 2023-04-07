@@ -66,7 +66,7 @@ function displayImages(images) {
 }
 
 // Function to handle HTTP requests
-async function handleRequest() {}
+async function handleRequest(url) {}
 
 // Event listener for the search form
 searchForm.addEventListener('submit', event => {
@@ -75,10 +75,12 @@ searchForm.addEventListener('submit', event => {
   searchQuery = event.target.elements.searchQuery.value.trim();
   galleryDiv.innerHTML = '';
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
+  handleRequest(url);
 });
 
 // Event listener for the load more button
 loadMoreBtn.addEventListener('click', () => {
   page = +1;
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
+  handleRequest(url);
 });
