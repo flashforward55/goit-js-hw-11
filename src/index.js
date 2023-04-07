@@ -47,6 +47,15 @@ function displayImages(images) {
     detailsDiv.appendChild(viewsSpan);
     detailsDiv.appendChild(commentsSpan);
     detailsDiv.appendChild(downloadsSpan);
+
+    const link = document.createElement('a');
+    link.href = image.largeImageURL;
+    link.appendChild(img);
+    link.appendChild(detailsDiv);
+
+    div.appendChild(link);
+
+    galleryDiv.appendChild(div);
   });
 }
 
