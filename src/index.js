@@ -9,3 +9,18 @@ const BASE_URL = `https://pixabay.com/api/?key=${API_KEY}`;
 const searchForm = document.querySelector('#search-form');
 const galleryDiv = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
+
+let page = 1;
+let searchQuery = '';
+
+// Function to display images on the page
+function displayImages() {}
+
+// Function to handle HTTP requests
+async function handleRequest() {}
+
+// Event listener for the search form
+searchForm.addEventListener();
+
+// Event listener for the load more button
+loadMoreBtn.addEventListener();
