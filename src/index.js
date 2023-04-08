@@ -1,4 +1,4 @@
-import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import axios from 'axios';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import SimpleLightbox from 'simplelightbox';
@@ -12,7 +12,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 let page = 0;
 let searchQuery = '';
-const perPage = 20;
+const perPage = 40;
 
 // Function to display images on the page
 function displayImages(images) {
@@ -66,13 +66,34 @@ function displayImages(images) {
 }
 
 // Function to handle HTTP requests
-async function handleRequest(url) {}
+async function handleRequest(url) {
+  try {
+    const response = await axios.get(url);
+    const data = response.data;
+    const images = data.hits;
+    console.log(typeof images);
+
+    displayImages(images);
+
+    if (images.length === 0) {
+      Notify.failure('No images found. Please try a different search query.');
+    }
+  } catch (error) {
+    Notify.failure('Error fetching images. Please try again later.');
+  }
+}
 
 // Event listener for the search form
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
   page = 1;
   searchQuery = event.target.elements.searchQuery.value.trim();
+  if (!searchQuery) {
+    Notify.failure(
+      'The search string cannot be empty. Please specify your search query'
+    );
+    return;
+  }
   galleryDiv.innerHTML = '';
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
   handleRequest(url);
