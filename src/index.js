@@ -12,7 +12,8 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 let page = 0;
 let searchQuery = '';
-const perPage = 20;
+const perPage = 40;
+loadMoreBtn.classList.add('is-hidden');
 
 // Function to display images on the page
 function displayImages(images) {
@@ -79,6 +80,14 @@ async function handleRequest(url) {
       );
     if (images.length === 0) {
       Notify.failure('No images found. Please try a different search query.');
+    }
+
+    const totalPages = Math.ceil(imagesSearchQuery / perPage);
+    if (page >= totalPages) {
+      loadMoreBtn.classList.add('is-hidden');
+      Notify.info("We're sorry, but you've reached the end of search results.");
+    } else {
+      loadMoreBtn.classList.remove('is-hidden');
     }
   } catch (error) {
     Notify.failure('Error fetching images. Please try again later.');
