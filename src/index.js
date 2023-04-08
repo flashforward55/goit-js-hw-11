@@ -70,7 +70,7 @@ function smoothPageScrolling() {
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
-  const scrollAmount = cardHeight * 2.8;
+  const scrollAmount = cardHeight * 2.82;
   window.scrollBy({
     top: scrollAmount,
     behavior: 'smooth',
