@@ -12,7 +12,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 let page = 0;
 let searchQuery = '';
-const perPage = 40;
+const perPage = 20;
 
 // Function to display images on the page
 function displayImages(images) {
@@ -71,8 +71,12 @@ async function handleRequest(url) {
     const response = await axios.get(url);
     const data = response.data;
     const images = data.hits;
+    const imagesSearchQuery = data.totalHits;
     displayImages(images);
-    Notify.success('Request completed successfully.');
+    if (page === 1)
+      Notify.success(
+        `Request completed successfully. We found ${imagesSearchQuery} images`
+      );
     if (images.length === 0) {
       Notify.failure('No images found. Please try a different search query.');
     }
@@ -99,7 +103,7 @@ searchForm.addEventListener('submit', async event => {
 
 // Event listener for the load more button
 loadMoreBtn.addEventListener('click', async () => {
-  page = +1;
+  page += 1;
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
   await handleRequest(url);
 });
