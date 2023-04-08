@@ -73,17 +73,16 @@ async function handleRequest(url) {
     const data = response.data;
     const images = data.hits;
     const imagesSearchQuery = data.totalHits;
+    const totalPages = Math.ceil(imagesSearchQuery / perPage);
     displayImages(images);
-    if (page === 1)
+    if (images.length === 0) {
+      Notify.failure('No images found. Please try a different search query.');
+    } else if (page === 1) {
       Notify.success(
         `Request completed successfully. We found ${imagesSearchQuery} images`
       );
-    if (images.length === 0) {
-      Notify.failure('No images found. Please try a different search query.');
-    }
-
-    const totalPages = Math.ceil(imagesSearchQuery / perPage);
-    if (page >= totalPages) {
+      loadMoreBtn.classList.remove('is-hidden');
+    } else if (page >= totalPages) {
       loadMoreBtn.classList.add('is-hidden');
       Notify.info("We're sorry, but you've reached the end of search results.");
     } else {
