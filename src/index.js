@@ -66,6 +66,17 @@ function displayImages(images) {
   }).refresh();
 }
 
+function smoothPageScrolling() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+  const scrollAmount = cardHeight * 2.8;
+  window.scrollBy({
+    top: scrollAmount,
+    behavior: 'smooth',
+  });
+}
+
 // Function to handle HTTP requests
 async function handleRequest(url) {
   try {
@@ -75,6 +86,7 @@ async function handleRequest(url) {
     const imagesSearchQuery = data.totalHits;
     const totalPages = Math.ceil(imagesSearchQuery / perPage);
     displayImages(images);
+
     if (images.length === 0) {
       Notify.failure('No images found. Please try a different search query.');
     } else if (page === 1) {
@@ -112,4 +124,5 @@ loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
   await handleRequest(url);
+  smoothPageScrolling();
 });
