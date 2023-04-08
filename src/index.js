@@ -65,12 +65,12 @@ function displayImages(images) {
     captionDelay: 250,
   }).refresh();
 }
-
-function smoothPageScrolling() {
+//Smooth page scrolling after the request
+function smoothPageScrolling(perPage) {
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
-  const scrollAmount = cardHeight * 2.82;
+  const scrollAmount = cardHeight * perPage;
   window.scrollBy({
     top: scrollAmount,
     behavior: 'smooth',
@@ -84,11 +84,16 @@ async function handleRequest(url) {
     const data = response.data;
     const images = data.hits;
     const imagesSearchQuery = data.totalHits;
+    const totalImages = parseInt(imagesSearchQuery);
     const totalPages = Math.ceil(imagesSearchQuery / perPage);
     displayImages(images);
 
     if (images.length === 0) {
       Notify.failure('No images found. Please try a different search query.');
+      loadMoreBtn.classList.add('is-hidden');
+    } else if (images.length < 40) {
+      loadMoreBtn.classList.add('is-hidden');
+      Notify.success(`Hooray! We found ${imagesSearchQuery} images`);
     } else if (page === 1) {
       Notify.success(`Hooray! We found ${imagesSearchQuery} images`);
       loadMoreBtn.classList.remove('is-hidden');
@@ -124,5 +129,5 @@ loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
   await handleRequest(url);
-  smoothPageScrolling();
+  smoothPageScrolling(perPage);
 });
