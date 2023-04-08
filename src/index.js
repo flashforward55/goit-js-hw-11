@@ -71,10 +71,7 @@ async function handleRequest(url) {
     const response = await axios.get(url);
     const data = response.data;
     const images = data.hits;
-    console.log(typeof images);
-
     displayImages(images);
-
     if (images.length === 0) {
       Notify.failure('No images found. Please try a different search query.');
     }
@@ -84,7 +81,7 @@ async function handleRequest(url) {
 }
 
 // Event listener for the search form
-searchForm.addEventListener('submit', event => {
+searchForm.addEventListener('submit', async event => {
   event.preventDefault();
   page = 1;
   searchQuery = event.target.elements.searchQuery.value.trim();
@@ -96,12 +93,12 @@ searchForm.addEventListener('submit', event => {
   }
   galleryDiv.innerHTML = '';
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
-  handleRequest(url);
+  await handleRequest(url);
 });
 
 // Event listener for the load more button
-loadMoreBtn.addEventListener('click', () => {
+loadMoreBtn.addEventListener('click', async () => {
   page = +1;
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
-  handleRequest(url);
+  await handleRequest(url);
 });
