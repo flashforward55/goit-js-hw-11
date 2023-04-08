@@ -153,7 +153,7 @@ body {
   justify-content: center;
   flex-direction: row-reverse;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   margin: 10px auto 0;
   position: relative;
   background-color: white;
@@ -166,21 +166,23 @@ body {
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   color: #333;
-  padding: 15px;
+  padding: 10px;
   border: none;
   border-radius: 25px;
   width: 100%;
   outline: none;
-  background-color: #E9EBEC;
+  // background-color: #E9EBEC;
+  background-color: transparent;
 }
 
 .search-form button[type="submit"] {
   // background-color: #22b8cf;
   border: none;
-  background-color: #E9EBEC;
+  // background-color: #E9EBEC;
+  background-color: transparent;
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
-  padding: 15px 25px;
+  padding: 10px 15px;
   border-radius: 25px;
   cursor: pointer;
   margin-left: 10px;

@@ -78,9 +78,7 @@ async function handleRequest(url) {
     if (images.length === 0) {
       Notify.failure('No images found. Please try a different search query.');
     } else if (page === 1) {
-      Notify.success(
-        `Request completed successfully. We found ${imagesSearchQuery} images`
-      );
+      Notify.success(`Hooray! We found ${imagesSearchQuery} images`);
       loadMoreBtn.classList.remove('is-hidden');
     } else if (page >= totalPages) {
       loadMoreBtn.classList.add('is-hidden');
