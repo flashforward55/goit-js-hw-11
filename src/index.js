@@ -72,6 +72,7 @@ async function handleRequest(url) {
     const data = response.data;
     const images = data.hits;
     displayImages(images);
+    Notify.success('Request completed successfully.');
     if (images.length === 0) {
       Notify.failure('No images found. Please try a different search query.');
     }
