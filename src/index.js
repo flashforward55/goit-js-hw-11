@@ -143,8 +143,7 @@ function onScroll() {
   const coords = document.documentElement.clientHeight;
   if (scrolled > coords) {
     toTopBtn.classList.add('show');
-  }
-  if (scrolled < coords) {
+  } else {
     toTopBtn.classList.remove('show');
   }
 }
