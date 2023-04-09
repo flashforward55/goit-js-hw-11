@@ -18,7 +18,7 @@ loadMoreBtn.classList.add('is-hidden');
 // Function to display images on the page
 function displayImages(images) {
   images.forEach(image => {
-    const div = document.createElement('div');
+    const div = document.createElement('li');
     div.classList.add('gallery-item');
 
     const img = document.createElement('img');
@@ -132,3 +132,25 @@ loadMoreBtn.addEventListener('click', async () => {
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
   await handleRequest(url);
 });
+
+const toTopBtn = document.querySelector('.btn-to-top');
+
+window.addEventListener('scroll', onScroll);
+toTopBtn.addEventListener('click', onToTopBtn);
+
+function onScroll() {
+  const scrolled = window.pageYOffset;
+  const coords = document.documentElement.clientHeight;
+  if (scrolled > coords) {
+    toTopBtn.classList.add('show');
+  }
+  if (scrolled < coords) {
+    toTopBtn.classList.remove('show');
+  }
+}
+
+function onToTopBtn() {
+  if (window.pageYOffset > 0) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
