@@ -17,48 +17,22 @@ loadMoreBtn.classList.add('is-hidden');
 
 // Function to display images on the page
 function displayImages(images) {
-  images.forEach(image => {
-    const div = document.createElement('li');
-    div.classList.add('gallery-item');
-
-    const img = document.createElement('img');
-    img.src = image.webformatURL;
-    img.alt = image.tags;
-    img.loading = 'lazy';
-
-    const detailsDiv = document.createElement('div');
-    detailsDiv.classList.add('details');
-
-    const likesSpan = document.createElement('span');
-    likesSpan.classList.add('likes');
-    likesSpan.textContent = image.likes.toString();
-
-    const viewsSpan = document.createElement('span');
-    viewsSpan.classList.add('views');
-    viewsSpan.textContent = image.views.toString();
-
-    const commentsSpan = document.createElement('span');
-    commentsSpan.classList.add('comments');
-    commentsSpan.textContent = image.comments.toString();
-
-    const downloadsSpan = document.createElement('span');
-    downloadsSpan.classList.add('downloads');
-    downloadsSpan.textContent = image.downloads.toString();
-
-    detailsDiv.appendChild(likesSpan);
-    detailsDiv.appendChild(viewsSpan);
-    detailsDiv.appendChild(commentsSpan);
-    detailsDiv.appendChild(downloadsSpan);
-
-    const link = document.createElement('a');
-    link.href = image.largeImageURL;
-    link.appendChild(img);
-    link.appendChild(detailsDiv);
-
-    div.appendChild(link);
-
-    galleryDiv.appendChild(div);
-  });
+  const galleryItems = images.map(
+    image => `
+    <li class="gallery-item">
+      <a href="${image.largeImageURL}">
+        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy">
+        <div class="details">
+          <span class="likes">${image.likes}</span>
+          <span class="views">${image.views}</span>
+          <span class="comments">${image.comments}</span>
+          <span class="downloads">${image.downloads}</span>
+        </div>
+      </a>
+    </li>
+  `
+  );
+  galleryDiv.insertAdjacentHTML('beforeend', galleryItems.join(''));
 
   // Activate the simplelightbox plugin
   let lightbox = new SimpleLightbox('.gallery a', {
@@ -67,6 +41,7 @@ function displayImages(images) {
 
   if (page !== 1) smoothPageScrolling(images);
 }
+
 //Smooth page scrolling after the request
 function smoothPageScrolling(images) {
   const { height: cardHeight } = document
@@ -86,7 +61,6 @@ async function handleRequest(url) {
     const data = response.data;
     const images = data.hits;
     const imagesSearchQuery = data.totalHits;
-    const totalImages = parseInt(imagesSearchQuery);
     const totalPages = Math.ceil(imagesSearchQuery / perPage);
     displayImages(images);
 
