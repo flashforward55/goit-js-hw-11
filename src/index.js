@@ -16,7 +16,7 @@ const perPage = 40;
 loadMoreBtn.classList.add('is-hidden');
 
 // Function to display images on the page
-function displayImages(images) {
+function displayImages(images, totalPages) {
   const galleryItems = images.map(
     image => `
     <li class="gallery-item">
@@ -62,18 +62,21 @@ async function handleRequest(url) {
     const images = data.hits;
     const imagesSearchQuery = data.totalHits;
     const totalPages = Math.ceil(imagesSearchQuery / perPage);
-    displayImages(images);
+    displayImages(images, totalPages);
 
     if (images.length === 0) {
-      Notify.failure('No images found. Please try a different search query.');
+      Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+      galleryDiv.innerHTML = '';
       loadMoreBtn.classList.add('is-hidden');
-    } else if (images.length < 40) {
+    } else if (page === 1 && images.length < 40) {
       loadMoreBtn.classList.add('is-hidden');
       Notify.success(`Hooray! We found ${imagesSearchQuery} images`);
     } else if (page === 1) {
       Notify.success(`Hooray! We found ${imagesSearchQuery} images`);
       loadMoreBtn.classList.remove('is-hidden');
-    } else if (page >= totalPages) {
+    } else if (images.length < 40) {
       loadMoreBtn.classList.add('is-hidden');
       Notify.info("We're sorry, but you've reached the end of search results.");
     } else {
@@ -93,6 +96,8 @@ searchForm.addEventListener('submit', async event => {
     Notify.failure(
       'The search string cannot be empty. Please specify your search query'
     );
+    galleryDiv.innerHTML = '';
+    loadMoreBtn.classList.add('is-hidden');
     return;
   }
   galleryDiv.innerHTML = '';
