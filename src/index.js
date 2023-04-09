@@ -61,8 +61,7 @@ async function handleRequest(url) {
     const data = response.data;
     const images = data.hits;
     const imagesSearchQuery = data.totalHits;
-    const totalPages = Math.ceil(imagesSearchQuery / perPage);
-    displayImages(images, totalPages);
+    displayImages(images);
 
     if (images.length === 0) {
       Notify.failure(
@@ -70,13 +69,13 @@ async function handleRequest(url) {
       );
       galleryDiv.innerHTML = '';
       loadMoreBtn.classList.add('is-hidden');
-    } else if (page === 1 && images.length < 40) {
+    } else if (page === 1 && images.length < perPage) {
       loadMoreBtn.classList.add('is-hidden');
       Notify.success(`Hooray! We found ${imagesSearchQuery} images`);
     } else if (page === 1) {
       Notify.success(`Hooray! We found ${imagesSearchQuery} images`);
       loadMoreBtn.classList.remove('is-hidden');
-    } else if (images.length < 40) {
+    } else if (images.length < perPage) {
       loadMoreBtn.classList.add('is-hidden');
       Notify.info("We're sorry, but you've reached the end of search results.");
     } else {
