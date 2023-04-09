@@ -131,5 +131,4 @@ loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
   await handleRequest(url);
-  // smoothPageScrolling(perPage);
 });
