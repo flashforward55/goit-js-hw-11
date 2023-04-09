@@ -64,13 +64,15 @@ function displayImages(images) {
   let lightbox = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
   }).refresh();
+
+  if (page !== 1) smoothPageScrolling(images);
 }
 //Smooth page scrolling after the request
-function smoothPageScrolling(perPage) {
+function smoothPageScrolling(images) {
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
-  const scrollAmount = cardHeight * perPage;
+  const scrollAmount = cardHeight * images.length;
   window.scrollBy({
     top: scrollAmount,
     behavior: 'smooth',
@@ -129,5 +131,5 @@ loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
   await handleRequest(url);
-  smoothPageScrolling(perPage);
+  // smoothPageScrolling(perPage);
 });
