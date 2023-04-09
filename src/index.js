@@ -18,15 +18,23 @@ loadMoreBtn.classList.add('is-hidden');
 // Function to display images on the page
 function displayImages(images) {
   const galleryItems = images.map(
-    image => `
+    ({
+      largeImageURL,
+      webformatURL,
+      tags,
+      likes,
+      views,
+      comments,
+      downloads,
+    }) => `
     <li class="gallery-item">
-      <a href="${image.largeImageURL}">
-        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy">
+      <a href="${largeImageURL}">
+        <img src="${webformatURL}" alt="${tags}" loading="lazy">
         <div class="details">
-          <span class="likes">${image.likes}</span>
-          <span class="views">${image.views}</span>
-          <span class="comments">${image.comments}</span>
-          <span class="downloads">${image.downloads}</span>
+          <span class="likes">${likes}</span>
+          <span class="views">${views}</span>
+          <span class="comments">${comments}</span>
+          <span class="downloads">${downloads}</span>
         </div>
       </a>
     </li>
