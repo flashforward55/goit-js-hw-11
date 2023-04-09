@@ -16,7 +16,7 @@ const perPage = 40;
 loadMoreBtn.classList.add('is-hidden');
 
 // Function to display images on the page
-function displayImages(images, totalPages) {
+function displayImages(images) {
   const galleryItems = images.map(
     image => `
     <li class="gallery-item">
