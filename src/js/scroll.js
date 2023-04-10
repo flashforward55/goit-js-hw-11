@@ -1,7 +1,7 @@
 const toTopBtn = document.querySelector('.btn-to-top');
 
 function onScroll() {
-  const scrolled = window.pageYOffset;
+  const scrolled = window.scrollY;
   const coords = document.documentElement.clientHeight;
   if (scrolled > coords) {
     toTopBtn.classList.add('show');
@@ -11,7 +11,7 @@ function onScroll() {
 }
 
 function onToTopBtn() {
-  if (window.pageYOffset > 0) {
+  if (window.scrollY > 0) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
