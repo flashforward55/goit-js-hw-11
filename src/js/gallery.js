@@ -20,10 +20,10 @@ function displayImages(images) {
       <a href="${largeImageURL}">
         <img src="${webformatURL}" alt="${tags}" loading="lazy">
         <div class="details">
-          <span class="likes">${likes}</span>
-          <span class="views">${views}</span>
-          <span class="comments">${comments}</span>
-          <span class="downloads">${downloads}</span>
+          <span class="likes">${likes.toLocaleString()}</span>
+          <span class="views">${views.toLocaleString()}</span>
+          <span class="comments">${comments.toLocaleString()}</span>
+          <span class="downloads">${downloads.toLocaleString()}</span>
         </div>
       </a>
     </li>
