@@ -51,4 +51,4 @@ function smoothPageScrolling(images) {
   });
 }
 
-export { displayImages, galleryDiv, page };
+export { displayImages, galleryDiv };

@@ -63,14 +63,31 @@ async function onSeadchForm(event) {
     return;
   }
   galleryDiv.innerHTML = '';
-  const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
+  const url = generateImageUrl(searchQuery, page, perPage);
   await handleRequest(url);
 }
 // Event listener for the load more button
 async function onLoadMoreButton() {
   page += 1;
-  const url = `${BASE_URL}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
+  const url = generateImageUrl(searchQuery, page, perPage);
   await handleRequest(url);
+}
+//Query string generation function
+function generateImageUrl(searchQuery, page, perPage) {
+  const params = {
+    key: API_KEY,
+    q: searchQuery,
+    image_type: 'photo',
+    orientation: 'horizontal',
+    safesearch: 'true',
+    page: page,
+    per_page: perPage,
+  };
+
+  const queryString = new URLSearchParams(params).toString();
+  const imageUrl = `${BASE_URL}&${queryString}`;
+
+  return imageUrl;
 }
 
 export { onSeadchForm, onLoadMoreButton, loadMoreBtn, searchForm, page };
