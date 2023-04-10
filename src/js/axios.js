@@ -10,7 +10,7 @@ import {
 import { displayImages, galleryDiv } from './gallery';
 
 const API_KEY = '35140926-fd12774c1839d7d0854ca625c';
-const BASE_URL = `https://pixabay.com/api/?key=${API_KEY}`;
+const BASE_URL = `https://pixabay.com/api/`;
 
 const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
@@ -63,17 +63,17 @@ async function onSeadchForm(event) {
     return;
   }
   galleryDiv.innerHTML = '';
-  const url = generateImageUrl(searchQuery, page, perPage);
+  const url = generateImageUrl(searchQuery);
   await handleRequest(url);
 }
 // Event listener for the load more button
 async function onLoadMoreButton() {
   page += 1;
-  const url = generateImageUrl(searchQuery, page, perPage);
+  const url = generateImageUrl(searchQuery);
   await handleRequest(url);
 }
 //Query string generation function
-function generateImageUrl(searchQuery, page, perPage) {
+function generateImageUrl(searchQuery) {
   const params = {
     key: API_KEY,
     q: searchQuery,
@@ -85,7 +85,7 @@ function generateImageUrl(searchQuery, page, perPage) {
   };
 
   const queryString = new URLSearchParams(params).toString();
-  const imageUrl = `${BASE_URL}&${queryString}`;
+  const imageUrl = `${BASE_URL}?${queryString}`;
 
   return imageUrl;
 }
