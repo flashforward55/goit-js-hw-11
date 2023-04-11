@@ -7,10 +7,8 @@ import {
   errorCatchImages,
 } from './notify';
 
+import { generateImageUrl } from './request';
 import { displayImages, galleryDiv } from './gallery';
-
-const API_KEY = '35140926-fd12774c1839d7d0854ca625c';
-const BASE_URL = `https://pixabay.com/api/`;
 
 const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
@@ -72,22 +70,13 @@ async function onLoadMoreButton() {
   const url = generateImageUrl(searchQuery);
   await handleRequest(url);
 }
-//Query string generation function
-function generateImageUrl(searchQuery) {
-  const params = {
-    key: API_KEY,
-    q: searchQuery,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: 'true',
-    page: page,
-    per_page: perPage,
-  };
 
-  const queryString = new URLSearchParams(params).toString();
-  const imageUrl = `${BASE_URL}?${queryString}`;
-
-  return imageUrl;
-}
-
-export { onSeadchForm, onLoadMoreButton, loadMoreBtn, searchForm, page };
+export {
+  onSeadchForm,
+  onLoadMoreButton,
+  loadMoreBtn,
+  searchForm,
+  page,
+  searchQuery,
+  perPage,
+};
