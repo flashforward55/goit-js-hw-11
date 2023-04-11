@@ -44,8 +44,11 @@ async function handleRequest(url) {
       loadMoreBtn.classList.remove('is-hidden');
     }
   } catch (error) {
-    errorCatchImages();
-    console.error(error);
+    console.log(error);
+    if (error.response.data === '[ERROR 400] "page" is out of valid range.') {
+      searchResultEnd();
+      loadMoreBtn.classList.add('is-hidden');
+    } else errorCatchImages();
   }
 }
 
