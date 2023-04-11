@@ -6,7 +6,6 @@ import {
   errrorStringEmpy,
   errorCatchImages,
 } from './notify';
-
 import { generateImageUrl } from './request';
 import { displayImages, galleryDiv } from './gallery';
 
@@ -60,6 +59,7 @@ async function onSeadchForm(event) {
     errrorStringEmpy();
     galleryDiv.innerHTML = '';
     loadMoreBtn.classList.add('is-hidden');
+
     return;
   }
   galleryDiv.innerHTML = '';

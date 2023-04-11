@@ -1,8 +1,8 @@
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import SimpleLightbox from 'simplelightbox';
+import { page } from './axios';
 
 const galleryDiv = document.querySelector('.gallery');
-import { page } from './axios';
 
 // Function to display images on the page
 function displayImages(images) {
@@ -44,6 +44,7 @@ function smoothPageScrolling(images) {
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
+
   const scrollAmount = cardHeight * images.length;
   window.scrollBy({
     top: scrollAmount,
