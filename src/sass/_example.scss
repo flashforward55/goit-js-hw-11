@@ -62,6 +62,7 @@ button {
 
 .gallery-item:hover img {
   transform: scale(1.1);
+  cursor: zoom-in;
 }
 
 .gallery-item img {
