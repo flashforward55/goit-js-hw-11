@@ -34,7 +34,8 @@ function displayImages(images) {
   // Activate the simplelightbox plugin
   let lightbox = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
-  }).refresh();
+  });
+  lightbox.refresh();
 
   if (page > 1) smoothPageScrolling(images);
 }
