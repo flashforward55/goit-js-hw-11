@@ -8,6 +8,7 @@ import {
 } from './notify';
 import { generateImageUrl } from './request';
 import { displayImages, galleryDiv } from './gallery';
+import { loader } from './loader';
 
 const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
@@ -63,8 +64,10 @@ async function onSeadchForm(event) {
     return;
   }
   galleryDiv.innerHTML = '';
+  loader.classList.remove('is-hidden');
   const url = generateImageUrl(searchQuery);
   await handleRequest(url);
+  loader.classList.add('is-hidden');
 }
 // Event listener for the load more button
 async function onLoadMoreButton() {
