@@ -54,6 +54,7 @@ async function handleRequest(url) {
 // Event listener for the search form
 async function onSeadchForm(event) {
   event.preventDefault();
+  loadMoreBtn.classList.add('is-hidden');
   page = 1;
   searchQuery = event.target.elements.searchQuery.value.trim();
   if (!searchQuery) {
