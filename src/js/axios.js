@@ -88,6 +88,5 @@ export {
   loadMoreBtn,
   searchForm,
   page,
-  searchQuery,
   perPage,
 };
