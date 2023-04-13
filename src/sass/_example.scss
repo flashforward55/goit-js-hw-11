@@ -118,6 +118,7 @@ button {
 .gallery-item .details .likes::before {
   content: '♥';
   margin-right: 5px;
+  color: #f83600;
 }
 
 .gallery-item .details .views::before {
@@ -133,6 +134,7 @@ button {
 .gallery-item .details .downloads::before {
   content: '⤓';
   margin-right: 5px;
+  color: green
 }
 
 .load-more {

@@ -37,7 +37,7 @@ function displayImages(images) {
   galleryDiv.insertAdjacentHTML('beforeend', galleryItems.join(''));
   lightbox.refresh();
 
-  if (page > 1) smoothPageScrolling(images);
+  if (page > 1) smoothPageScrolling();
 }
 
 //Smooth page scrolling after the request
