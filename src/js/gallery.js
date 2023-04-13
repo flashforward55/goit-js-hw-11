@@ -4,6 +4,11 @@ import { page } from './axios';
 
 const galleryDiv = document.querySelector('.gallery');
 
+// Activate the simplelightbox plugin
+let lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+});
+
 // Function to display images on the page
 function displayImages(images) {
   const galleryItems = images.map(
@@ -30,23 +35,18 @@ function displayImages(images) {
   `
   );
   galleryDiv.insertAdjacentHTML('beforeend', galleryItems.join(''));
-
-  // Activate the simplelightbox plugin
-  let lightbox = new SimpleLightbox('.gallery a', {
-    captionDelay: 250,
-  });
   lightbox.refresh();
 
   if (page > 1) smoothPageScrolling(images);
 }
 
 //Smooth page scrolling after the request
-function smoothPageScrolling(images) {
+function smoothPageScrolling() {
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
 
-  const scrollAmount = cardHeight * images.length;
+  const scrollAmount = cardHeight * 2;
   window.scrollBy({
     top: scrollAmount,
     behavior: 'smooth',
