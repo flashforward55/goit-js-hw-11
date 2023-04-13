@@ -72,9 +72,14 @@ async function onSeadchForm(event) {
 }
 // Event listener for the load more button
 async function onLoadMoreButton() {
+  loadMoreBtn.classList.add('is-hidden');
+  loader.classList.remove('is-hidden');
+  loader.classList.add('loader-wrapper--padding');
   page += 1;
   const url = generateImageUrl(searchQuery);
   await handleRequest(url);
+  loader.classList.add('is-hidden');
+  loader.classList.remove('loader-wrapper--padding');
 }
 
 export {
